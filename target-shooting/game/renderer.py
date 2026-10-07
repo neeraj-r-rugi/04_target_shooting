@@ -22,7 +22,13 @@ def draw_text(surface, font, text, pos, color=COLOR_TEXT):
     surface.blit(font.render(text, True, color), pos)
 
 
-def draw_banner(surface, font, text):
+def draw_banner(surface, font, text, dy=0):
     surf = font.render(text, True, (255, 220, 80))
-    rect = surf.get_rect(center=(surface.get_width() // 2, surface.get_height() // 2))
+    rect = surf.get_rect(center=(surface.get_width() // 2,
+                                 surface.get_height() // 2 + dy))
     surface.blit(surf, rect)
+    
+def draw_overlay(surface, alpha=170):
+    overlay = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
+    overlay.fill((0, 0, 0, alpha))
+    surface.blit(overlay, (0, 0))
